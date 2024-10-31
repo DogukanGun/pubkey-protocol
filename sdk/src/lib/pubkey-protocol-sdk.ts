@@ -152,7 +152,7 @@ export class PubKeyProtocolSdk {
     )
   }
 
-  async communityGet({ community, nullable = false }: { community: string, nullable: boolean }) {
+  async communityGet({ community, nullable = false }: { community: string, nullable?: boolean }) {
     const res = isValidPublicKey(community)
       ? await this.communityGetByPda({ community: new PublicKey(community) })
       : await this.communityGetBySlug({ slug: community })
