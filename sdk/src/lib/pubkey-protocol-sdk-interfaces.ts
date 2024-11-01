@@ -77,6 +77,7 @@ export interface ProfileCreateOptions {
   feePayer: PublicKeyString
   name: string
   username?: string
+  bio?: string
 }
 
 export interface ProfileGetByProvider {
@@ -96,6 +97,7 @@ export interface ProfileIdentityAddOptions {
   provider: IdentityProvider
   providerId: string
   username: string
+  bio?: string
 }
 
 export interface ProfileIdentityRemoveOptions {
@@ -123,6 +125,7 @@ export interface ProfileUpdateOptions {
   feePayer: PublicKeyString
   name: string
   username: string
+  bio?: string
 }
 
 export interface PubKeyProfileSdkOptions {

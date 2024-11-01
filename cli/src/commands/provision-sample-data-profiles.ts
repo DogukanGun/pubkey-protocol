@@ -41,6 +41,7 @@ export const profileProvisionMap: ProfileProvisionMap = {
     create: {
       name: 'Alice',
       avatarUrl: `https://api.dicebear.com/9.x/bottts-neutral/svg?seed=alice`,
+      bio: 'Alice\'s bio',
     },
     identities: [
       { provider: IdentityProvider.Github, providerId: '123123', name: 'pubkey_alice' },
@@ -69,6 +70,7 @@ export const profileProvisionMap: ProfileProvisionMap = {
     create: {
       name: 'Bob',
       avatarUrl: `https://api.dicebear.com/9.x/bottts-neutral/svg?seed=bob`,
+      bio: 'Bob\'s bio',
     },
     identities: [
       { provider: IdentityProvider.Discord, providerId: '456456', name: 'pubkey_bob' },
@@ -103,7 +105,7 @@ export async function provisionSampleDataProfiles(options: ProvisionSampleDataOp
     username,
   }))
 
-  for (const { avatarUrl, name, username } of profilesCreate.filter((c) => !existingNames.includes(c.name))) {
+  for (const { avatarUrl, name, username, bio } of profilesCreate.filter((c) => !existingNames.includes(c.name))) {
     const authority = getKeypairFromByteArray(profileProvisionMap[username].authority.secretKey)
 
     const { input, tx: transaction } = await sdk.profileCreate({
@@ -113,6 +115,7 @@ export async function provisionSampleDataProfiles(options: ProvisionSampleDataOp
       avatarUrl,
       name,
       username,
+      bio,
     })
     transaction.sign([communityAuthority, authority])
     if (options.dryRun) {
@@ -127,9 +130,9 @@ export async function provisionSampleDataProfiles(options: ProvisionSampleDataOp
 
   const profilesIdentitiesAdd = Object.keys(profileProvisionMap)
     .filter((username) => Object.keys(profileProvisionMap[username].identities ?? []).length > 0)
-    .map((username) => ({ identities: profileProvisionMap[username].identities, username }))
+    .map((username) => ({ identities: profileProvisionMap[username].identities, username, bio:profileProvisionMap[username].create.bio }))
 
-  for (const { identities, username } of profilesIdentitiesAdd) {
+  for (const { identities, username, bio } of profilesIdentitiesAdd) {
     const authority = getKeypairFromByteArray(profileProvisionMap[username].authority.secretKey)
     for (const identity of identities) {
       const transaction = await sdk.profileIdentityAdd({
@@ -140,6 +143,7 @@ export async function provisionSampleDataProfiles(options: ProvisionSampleDataOp
         provider: identity.provider,
         providerId: identity.providerId,
         username,
+        bio
       })
       transaction.sign([communityAuthority, authority])
       if (options.dryRun) {
