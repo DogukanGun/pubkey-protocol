@@ -1983,12 +1983,6 @@ export type PubkeyProtocol = {
           {
             "name": "avatarUrl",
             "type": "string"
-          },
-          {
-            "name": "bio",
-            "type": {
-              "option": "string"
-            }
           }
         ]
       }

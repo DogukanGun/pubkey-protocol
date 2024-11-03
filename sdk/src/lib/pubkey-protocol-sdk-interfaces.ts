@@ -97,7 +97,6 @@ export interface ProfileIdentityAddOptions {
   provider: IdentityProvider
   providerId: string
   username: string
-  bio?: string
 }
 
 export interface ProfileIdentityRemoveOptions {

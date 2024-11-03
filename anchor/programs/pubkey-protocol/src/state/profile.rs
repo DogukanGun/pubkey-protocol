@@ -1,5 +1,3 @@
-use std::char::MAX;
-
 use crate::constants::*;
 use crate::errors::*;
 use crate::state::*;

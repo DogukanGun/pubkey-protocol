@@ -65,7 +65,6 @@ pub fn profile_create(ctx: Context<ProfileCreate>, args: ProfileCreateArgs) -> R
         username,
         name,
         avatar_url,
-        bio,
     } = args;
 
     let set_primary_wallet = Identity {
@@ -82,7 +81,7 @@ pub fn profile_create(ctx: Context<ProfileCreate>, args: ProfileCreateArgs) -> R
         avatar_url,
         authorities: vec![authority],
         identities: vec![set_primary_wallet],
-        bio:bio,
+        bio: None,
     });
 
     profile.validate()?;
@@ -95,5 +94,4 @@ pub struct ProfileCreateArgs {
     pub username: String,
     pub name: String,
     pub avatar_url: String,
-    pub bio: Option<String>,
 }

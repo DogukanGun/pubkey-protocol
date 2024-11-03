@@ -130,9 +130,9 @@ export async function provisionSampleDataProfiles(options: ProvisionSampleDataOp
 
   const profilesIdentitiesAdd = Object.keys(profileProvisionMap)
     .filter((username) => Object.keys(profileProvisionMap[username].identities ?? []).length > 0)
-    .map((username) => ({ identities: profileProvisionMap[username].identities, username, bio:profileProvisionMap[username].create.bio }))
+    .map((username) => ({ identities: profileProvisionMap[username].identities, username }))
 
-  for (const { identities, username, bio } of profilesIdentitiesAdd) {
+  for (const { identities, username } of profilesIdentitiesAdd) {
     const authority = getKeypairFromByteArray(profileProvisionMap[username].authority.secretKey)
     for (const identity of identities) {
       const transaction = await sdk.profileIdentityAdd({
@@ -143,7 +143,6 @@ export async function provisionSampleDataProfiles(options: ProvisionSampleDataOp
         provider: identity.provider,
         providerId: identity.providerId,
         username,
-        bio
       })
       transaction.sign([communityAuthority, authority])
       if (options.dryRun) {
