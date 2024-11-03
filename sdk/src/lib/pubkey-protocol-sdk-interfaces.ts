@@ -77,7 +77,6 @@ export interface ProfileCreateOptions {
   feePayer: PublicKeyString
   name: string
   username?: string
-  bio?: string
 }
 
 export interface ProfileGetByProvider {
@@ -118,11 +117,11 @@ export interface ProfileIdentityVerifyOptions {
 }
 
 export interface ProfileUpdateOptions {
-  avatarUrl: string
+  avatarUrl?: string
   authority: PublicKeyString
   community: PublicKeyString
   feePayer: PublicKeyString
-  name: string
+  name?: string
   username: string
   bio?: string
 }

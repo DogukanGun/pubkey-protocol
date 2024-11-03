@@ -38,11 +38,11 @@ export function PubkeyProtocolUiProfileListItem({
               <Group>
                 <Code>{profile.username}</Code>
               </Group>
-              {profile.bio &&
+              {profile.bio && (
                 <Group>
                   <Code>{profile.bio}</Code>
                 </Group>
-              }
+              )}
               {children}
             </Stack>
           </Stack>

@@ -496,7 +496,6 @@ export class PubKeyProtocolSdk {
       avatarUrl: options.avatarUrl || getAvatarUrlProfile(username),
       name: options.name,
       username,
-      bio: options.bio !== undefined ? options.bio : null, 
     }
     const ix = await this.program.methods
       .profileCreate(input)
@@ -524,7 +523,7 @@ export class PubKeyProtocolSdk {
     const ix = await this.program.methods
       .profileUpdate({
         newAvatarUrl: options.avatarUrl ?? null,
-        newName: options.name,
+        newName: options.name ?? null,
         newBio: options.bio ?? null,
       })
       .accountsStrict({
