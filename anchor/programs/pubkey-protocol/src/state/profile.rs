@@ -81,7 +81,7 @@ impl Profile {
 
         // Bio validation
         require!(
-            bio_len > 0 && bio_len <= MAX_BIO_SIZE,
+            bio_len <= MAX_BIO_SIZE,
             ProtocolError::InvalidBioSize
         );
         for identity in self.identities.clone() {
